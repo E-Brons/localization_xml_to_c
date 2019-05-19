@@ -1,0 +1,80 @@
+﻿<resources>
+    <string name="action_settings">Configuración</string>
+    <string name="low">Bajo</string>
+    <string name="high">Alto</string>
+    <string name="version">Versión</string>
+    <string name="settings">Configuración</string>
+    <string name="cancel">CANCELAR</string>
+    <string name="ok">Aceptar</string>
+    <string name="close">CERRAR</string>
+    <string name="logout">Salir</string>
+    <string name="unknown">N/D</string>
+    <string name="welcome">Bienvenido,</string>
+    <string name="menu_copy">Copiar</string>
+    <string name="menu_paste">pegar</string>
+    <string name="menu_refresh">actualizar</string>
+    <string name="time">Hora</string>
+    <string name="clock_settings">Ajustes del reloj</string>
+    <string name="daylight_timezones_message">El Controlador admite automáticamente DST para el estándar</string>
+    <string name="daylight_european_timezones">Horario europeo</string>
+    <string name="daylight_usa_timezones">Horario de EE.UU. y Canadá</string>
+    <string name="zones">zonas</string>
+    <string name="date">Fecha</string>
+    <string name="timezone">Zona horaria</string>
+    <string name="dst_end_time">Hora de finalización DST</string>
+    <string name="dst_start_time">Hora de inicio DST</string>
+    <string name="dst_end_date">Fecha de finalización DST</string>
+    <string name="dst_start_date">Fecha de inicio DST</string>
+    <string name="use_daylight_saving_time">Usar horario de verano</string>
+    <string name="show_controller_time">Mostrar hora del controlador</string>
+    <string name="show_tablet_time">Mostrar hora de la tableta</string>
+    <string name="set_dst_dates_manually">Establecer las fechas DST manualmente</string>
+    <string name="european_timezones_list_title">Zonas horarias europeas admitidas:</string>
+    <string-array name="array_european_timezones">
+        <item>(UTC+00:00)</item>
+        <item>(UTC+01:00)</item>
+        <item>(UTC+01:00)</item>
+        <item>(UTC+02:00)</item>
+    </string-array>
+    <string-array name="array_european_timezones_description">
+        <item>Horario del Meridiano de Greenwich</item>
+        <item>Horario Central Europeo Estándar</item>
+        <item>Horario Occidental Europeo Estándar</item>
+        <item>Horario Oriental Europeo Estándar</item>
+    </string-array>
+    <string name="us_timezones_list_title">Zonas horarias de EE.UU. y Canadá admitidos:</string>
+    <string-array name="array_us_timezones">
+        <item>(UTC- 04:00)</item>
+        <item>(UTC-05:00)</item>
+        <item>(UTC-06:00)</item>
+        <item>(UTC-07:00)</item>
+        <item>(UTC-08:00)</item>
+        <item>(UTC-08:00)</item>
+    </string-array>
+    <string-array name="array_us_timezones_description">
+        <item>Horario del Atlántico (Canadá)</item>
+        <item>Horario del Este (EE.UU y Canadá)</item>
+        <item>Horario Central (EE.UU y Canadá)</item>
+        <item>Horario de las Montañas (EE.UU y Canadá)</item>
+        <item>Horario del Pacífico (EE.UU. y Canadá)</item>
+        <item>Alaska</item>
+    </string-array>
+    <string name="DAYMODESELECTION_INCLUDE_ALL_DAY">Modo diurno - Siempre</string>
+    <string name="DAYMODESELECTION_EXCLUDE_ALL_DAY">Modo nocturno - Siempre</string>
+    <string name="DAYMODESELECTION_CUSTOM_TIME_RANGE">Alcance personalizado</string>
+    <string name="DAYOFWEEK_MONDAY">Lunes</string>
+    <string name="DAYOFWEEK_TUESDAY">Martes</string>
+    <string name="DAYOFWEEK_WEDNESDAY">Miércoles</string>
+    <string name="DAYOFWEEK_THURSDAY">Jueves</string>
+    <string name="DAYOFWEEK_FRIDAY">Viernes</string>
+    <string name="DAYOFWEEK_SATURDAY">Sábado</string>
+    <string name="DAYOFWEEK_SUNDAY">Domingo</string>
+    <string name="schedule">Programación</string>
+    <string name="first_name">Nombre</string>
+    <string name="middle_name">Segundo nombre</string>
+    <string name="middle_names">Segundo nombre</string>
+    <string name="last_name">Apellidos</string>
+    <string name="pin_code">Código pin</string>
+    <string name="users">Usuarios</string>
+    <string name="user">Usuario</string>
+</resources>
