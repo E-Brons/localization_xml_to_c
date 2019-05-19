@@ -18,21 +18,14 @@ Details:
         </string-array>
     </resources>
     This script customization is through companion 'translation_xml_to_c_cfg.py' config file
-
-Copyright:
-(c) Copyright 2018 Stanley Black & Decker
-ALL RIGHTS RESERVED
-This is a private source - distribution and/or use is forbidden without a written permission by owner
 """
 
 #
 # Imports
 #
-
 from colorama import init as init_colorama
 from termcolor import colored
 from xml.dom import minidom
-
 # Configuration file
 import translation_xml_to_c_cfg as CFG
 
@@ -51,26 +44,43 @@ COLOR_CODE = {"OUTPUT": 'magenta',
 # Functions
 #
 def print_debug(message):
+    """ print a message with debug formatting and filtering
+    :param message: message to be printed
+    :type message:  string
+    :return: None
+    """
     if DEBUG_LOGGING:
         print(colored(message, COLOR_CODE["DEBUG"]))
 
 
 def print_error(message):
+    """ print a message with error formatting
+    :param message: message to be printed
+    :type message:  string
+    :return: None
+    """
     print(colored(message, COLOR_CODE["ERROR"]))
 
 
 def create_output_header(language_names, members_name_and_count):
+    """ Create a C header file to describe the languages dictionaries and dictionary struct
+    :param language_names: names of languages to support
+    :type language_names:  list (string)
+    :param members_name_and_count: dictionary of member names -> 0 for non-array, count number of values for array
+    :type members_name_and_count:  dictionary {string : int}
+    :return: None
+    """
     output_file_name = CFG.OUTPUT_HEADER_FILE_NAME
 
     # write header file
-    with open(output_file_name,'w') as output_header_file:
+    with open(output_file_name, 'w') as output_header_file:
         # write prolog
         output_header_file.write(CFG.OUTPUT_HEADER_PROLOG)
 
         # write the translation structure definition
         output_header_file.write("// Definitions" + CFG.SOURCE_FILES_EOL)
         output_header_file.write("typedef struct {0}{1}".format(CFG.OUTPUT_STRUCT_TYPENAME, CFG.SOURCE_FILES_EOL))
-        output_header_file.write("{"+ CFG.SOURCE_FILES_EOL)
+        output_header_file.write("{" + CFG.SOURCE_FILES_EOL)
         for member_name in members_name_and_count:
             member_count = members_name_and_count[member_name]
             if 0 == member_count:
@@ -78,51 +88,75 @@ def create_output_header(language_names, members_name_and_count):
                 output_header_file.write("    const char* {0};{1}".format(member_name, CFG.SOURCE_FILES_EOL))
             else:
                 # write the array member values
-                output_header_file.write("    const char* {0}[{1}];{2}".format(member_name, member_count, CFG.SOURCE_FILES_EOL))
+                output_header_file.write("    const char* {0}[{1}];{2}".format(member_name,
+                                                                               member_count,
+                                                                               CFG.SOURCE_FILES_EOL))
         output_header_file.write("} " + CFG.OUTPUT_STRUCT_TYPENAME + ";" + CFG.SOURCE_FILES_EOL)
 
         # write forward decleration for available languages
         output_header_file.write(CFG.SOURCE_FILES_EOL + "// Forward Declerations" + CFG.SOURCE_FILES_EOL)
         for language in language_names:
-            lang_var = CFG.OUTPUT_LANGUAGES_VARNAME.format(language)
-            output_header_file.write("extern const {0} {1};{2}".format(CFG.OUTPUT_STRUCT_TYPENAME, lang_var, CFG.SOURCE_FILES_EOL))
+            output_header_file.write("extern const {0} {1};{2}".format(CFG.OUTPUT_STRUCT_TYPENAME,
+                                                                       CFG.OUTPUT_LANGUAGES_VARNAME.format(language),
+                                                                       CFG.SOURCE_FILES_EOL))
 
     # print the file to screen (for debug)
     if OUTPUT_LOGGING:
-        print("Source File Created '{0}':\r\n".format(output_file_name))
-        with open(output_file_name,'r') as output_source_file:
+        print(colored("Source File Created '{0}':\r\n".format(output_file_name)))
+        with open(output_file_name, 'r') as output_source_file:
             print(colored(output_source_file.read(), COLOR_CODE["OUTPUT"]))
 
 
-def create_output_source(language_name, members_dict, member_arrs_dict):
+def create_output_source(language_name, members_dict):
+    """ Create a C source file to define the language's dictionary
+    :param language_name: name of language to create
+    :type language_name:  string
+    :param members_dict: dictionary of member names -> translated string(s)
+    :type members_dict:  dictionary {string : string/list of strings}
+    :return: None
+    """
     output_file_name = CFG.OUTPUT_SOURCE_FILE_NAME.format(language_name)
 
-    #write source file
-    with open(output_file_name,'w') as output_source_file:
+    # write source file
+    with open(output_file_name, 'w') as output_source_file:
         # write prolog
         output_source_file.write(CFG.OUTPUT_SOURCE_PROLOG.format(language_name))
+        # write the struct initialization list (by member assignment)
         output_source_file.write("{" + CFG.SOURCE_FILES_EOL)
-        # write the non-array member values
         for member_name in members_dict:
             value = members_dict[member_name]
-            output_source_file.write("    .{0} = {1},{2}".format(member_name, value, CFG.SOURCE_FILES_EOL))
-        # write the array member values
-        for member_name in member_arrs_dict:
-            output_source_file.write("    .{0}[] = {1}".format(member_name, CFG.SOURCE_FILES_EOL))
-            for value in member_arrs_dict[member_name]:
-                output_source_file.write("        {0},{1}".format(value, CFG.SOURCE_FILES_EOL))
-            output_source_file.write("             }" + CFG.SOURCE_FILES_EOL)
+            if type(value) is str:
+                # write the non-array member values
+                output_source_file.write("    .{0} = {1},{2}".format(member_name, value, CFG.SOURCE_FILES_EOL))
+            elif (type(value) is list) and (type(value[0]) is str):
+                # write the array member values
+                output_source_file.write("    .{0} = {1}".format(member_name, CFG.SOURCE_FILES_EOL))
+                for string in value:
+                    output_source_file.write("        {0},{1}".format(string, CFG.SOURCE_FILES_EOL))
+                output_source_file.write("             }" + CFG.SOURCE_FILES_EOL)
+            else:
+                print_error("unexpected type of member value {0}:{1}".format(member_name, type(value)))
         output_source_file.write("};" + CFG.SOURCE_FILES_EOL)
 
     # print the file to screen (for debug)
     if OUTPUT_LOGGING:
         print("Source File Created '{0}':\r\n".format(output_file_name))
-        with open(output_file_name,'r') as output_source_file:
+        with open(output_file_name, 'r') as output_source_file:
             print(colored(output_source_file.read(), COLOR_CODE["OUTPUT"]))
 
 
-def parse_input_xml(language_name, language_input_xml, member_name_dict):
-    print_debug("parse_input_xml {0} {1} {2}".format(language_name, language_input_xml, member_name_dict))
+def parse_input_xml(language_input_xml, members_name_and_count):
+    """ Parse an XML containing language's dictionary,
+         Update number of stings for each struct member,
+         return a dictionary with the language translation(s) for each member
+    :param language_name: name of language to create
+    :type language_name:  string
+    :param members_name_and_count: dictionary of member names -> 0 for non-array, count number of values for array
+    :type members_name_and_count:  dictionary {string : int}
+    :return: None
+    """
+    print_debug("parse_input_xml {0}".format(language_input_xml))
+    members_dict = dict()
 
     # parse the XML
     try:
@@ -132,40 +166,50 @@ def parse_input_xml(language_name, language_input_xml, member_name_dict):
         raise  # abort further execution
 
     # parse all non-array strings into the dictionary 'members_dict;
-    members_dict = dict()
     for element in parsed_xml.getElementsByTagName('string'):
         member_name = element.attributes['name'].value
-        if None == element.firstChild:
+        if element.firstChild is None:
             member_value = "0"
         else:
-            member_value = '"' + element.firstChild.data +'"'
+            member_value = '"' + element.firstChild.data + '"'
 
         # add to members dictionary for creating the output: language source file
         members_dict[member_name] = member_value
         # output 2: mark the member name as non-array for the output: all-languages header file
-        member_name_dict[member_name] = 0
+        members_name_and_count[member_name] = 0
         print_debug(" .{0} = {1},".format(member_name, members_dict[member_name]))
 
     # parse all array strings into the dictionary 'member_arrs_dict;
-    member_arrs_dict = dict()
     for element in parsed_xml.getElementsByTagName('string-array'):
         member_name = element.attributes['name'].value
-        print_debug(".{0} [] = ...; // string arrays are currently not supported".format(member_name))
+        print_debug(".{0} = ...; // string arrays support is TBD".format(member_name))
         # TODO - implement arrays
 
-    # create the output source file
-    create_output_source(language_name, members_dict, member_arrs_dict)
+    return members_dict
 
 
 def main():
-    # dict use for storing unique struct-member names and value which indicates the array size
-    g_member_name_dict = dict()
-    g_language_names = list()
-    for language in CFG.INPUT_LANGUAGES_XML_FILES:
-        parse_input_xml(language, CFG.INPUT_LANGUAGES_XML_FILES[language], g_member_name_dict)
-        g_language_names += [language]
+    """ Generate C header and sources that define dictionaries for the languages
+    :return: None
+    """
 
-    create_output_header(g_language_names, g_member_name_dict)
+    # dict use for storing unique member names and value which indicates the array size
+    member_number_of_strings = dict()
+    # list of languages names (directly derived from CFG.INPUT_LANGUAGES_XML_FILES)
+    language_names = list()
+    # find languages and members properties (from any XML)
+    for language in CFG.INPUT_LANGUAGES_XML_FILES:
+        language_names += [language]
+        # Parse an input XML and:
+        # a. Update number of strings for each member name
+        # b. Get dictionary for the current language
+        members_dict_lang = parse_input_xml(CFG.INPUT_LANGUAGES_XML_FILES[language],
+                                            member_number_of_strings)
+        # create the output source file, using the language dictionary
+        create_output_source(language, members_dict_lang)
+
+    create_output_header(language_names, member_number_of_strings)
+
 
 #
 # Run main

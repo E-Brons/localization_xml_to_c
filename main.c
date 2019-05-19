@@ -3,14 +3,22 @@
 
 int main()
 {
-    gui_strings_t language_array[] = { gui_strings_En,
-                                       gui_strings_Fr,
-                                       gui_strings_Es,
-                                       gui_strings_De};
+    struct
+    {
+        const char* name;
+        gui_strings_t* strings;
+    } languages[] = {
+                           { "English" , &gui_strings_En},
+                           { "French" , &gui_strings_Fr },
+                           { "Spanish" , &gui_strings_Es },
+                           { "German" , &gui_strings_De }
+                         };
+
     for (int i = 0; i < 4; ++i)
     {
-        gui_strings_t* lang = &language_array[i];
-        printf("%s %s!\t%s, %s!\r\n", lang->welcome, lang->user, lang->ok, lang->logout);
+        gui_strings_t* lang = languages[i].strings;
+        printf(" %s:\r\n", languages[i].name);
+        printf(" %11s %-14s %8s, %s!\r\n", lang->welcome, lang->user, lang->ok, lang->logout);
     }
 
     return 0;
