@@ -32,9 +32,6 @@ import translation_xml_to_c_cfg as CFG
 #
 # Constants
 #
-DEBUG_LOGGING = True
-OUTPUT_LOGGING = True
-
 COLOR_CODE = {"OUTPUT": 'magenta',
               "DEBUG": 'cyan',
               "ERROR": 'red'}
@@ -49,7 +46,7 @@ def print_debug(message):
     :type message:  string
     :return: None
     """
-    if DEBUG_LOGGING:
+    if CFG.DEBUG_LOGGING:
         print(colored(message, COLOR_CODE["DEBUG"]))
 
 
@@ -71,6 +68,7 @@ def create_output_header(language_names, members_name_and_count):
     :return: None
     """
     output_file_name = CFG.OUTPUT_HEADER_FILE_NAME
+    print_debug("create_output_header {0}".format(output_file_name))
 
     # write header file
     with open(output_file_name, 'w') as output_header_file:
@@ -101,10 +99,13 @@ def create_output_header(language_names, members_name_and_count):
                                                                        CFG.SOURCE_FILES_EOL))
 
     # print the file to screen (for debug)
-    if OUTPUT_LOGGING:
+    if CFG.OUTPUT_LOGGING:
         print(colored("Source File Created '{0}':\r\n".format(output_file_name)))
         with open(output_file_name, 'r') as output_source_file:
             print(colored(output_source_file.read(), COLOR_CODE["OUTPUT"]))
+
+    # add access MACROs
+    # TODO support default language
 
 
 def create_output_source(language_name, members_dict):
@@ -116,6 +117,7 @@ def create_output_source(language_name, members_dict):
     :return: None
     """
     output_file_name = CFG.OUTPUT_SOURCE_FILE_NAME.format(language_name)
+    print_debug("create_output_source {0}".format(output_file_name))
 
     # write source file
     with open(output_file_name, 'w') as output_source_file:
@@ -139,7 +141,7 @@ def create_output_source(language_name, members_dict):
         output_source_file.write("};" + CFG.SOURCE_FILES_EOL)
 
     # print the file to screen (for debug)
-    if OUTPUT_LOGGING:
+    if CFG.OUTPUT_LOGGING:
         print("Source File Created '{0}':\r\n".format(output_file_name))
         with open(output_file_name, 'r') as output_source_file:
             print(colored(output_source_file.read(), COLOR_CODE["OUTPUT"]))
@@ -149,8 +151,8 @@ def parse_input_xml(language_input_xml, members_name_and_count):
     """ Parse an XML containing language's dictionary,
          Update number of stings for each struct member,
          return a dictionary with the language translation(s) for each member
-    :param language_name: name of language to create
-    :type language_name:  string
+    :param language_input_xml: name of language xml file
+    :type language_input_xml:  string
     :param members_name_and_count: dictionary of member names -> 0 for non-array, count number of values for array
     :type members_name_and_count:  dictionary {string : int}
     :return: None
@@ -166,24 +168,32 @@ def parse_input_xml(language_input_xml, members_name_and_count):
         raise  # abort further execution
 
     # parse all non-array strings into the dictionary 'members_dict;
-    for element in parsed_xml.getElementsByTagName('string'):
-        member_name = element.attributes['name'].value
-        if element.firstChild is None:
+    for non_array_element in parsed_xml.getElementsByTagName('string'):
+        member_name = non_array_element.attributes['name'].value
+        if non_array_element.firstChild is None:
             member_value = "0"
         else:
-            member_value = '"' + element.firstChild.data + '"'
+            member_value = '"' + non_array_element.firstChild.data + '"'
 
         # add to members dictionary for creating the output: language source file
         members_dict[member_name] = member_value
         # output 2: mark the member name as non-array for the output: all-languages header file
         members_name_and_count[member_name] = 0
-        print_debug(" .{0} = {1},".format(member_name, members_dict[member_name]))
 
     # parse all array strings into the dictionary 'member_arrs_dict;
-    for element in parsed_xml.getElementsByTagName('string-array'):
-        member_name = element.attributes['name'].value
-        print_debug(".{0} = ...; // string arrays support is TBD".format(member_name))
-        # TODO - implement arrays
+    for array_element in parsed_xml.getElementsByTagName('string-array'):
+        member_name = array_element.attributes['name'].value
+        member_count = 0
+        member_value = "{"
+        for item in array_element.getElementsByTagName('item'):
+            member_value += '"' + item.firstChild.data + '", '
+            member_count += 1
+        member_value += "}"
+
+        # add to members dictionary for creating the output
+        members_dict[member_name] = member_value
+        # output 2: set the number of strings values for member name
+        members_name_and_count[member_name] = member_count
 
     return members_dict
 
@@ -209,6 +219,7 @@ def main():
         create_output_source(language, members_dict_lang)
 
     create_output_header(language_names, member_number_of_strings)
+    print_debug("Done!")
 
 
 #

@@ -13,49 +13,16 @@
     <string name="refresh">actualiser</string>
     <string name="time">Heure</string>
     <string name="clock_settings">Réglages de l\'horloge</string>
-    <string name="daylight_timezones_message">L\'heure d\'été est automatiquement prise en charge par défaut par le contrôleur</string>
-    <string name="daylight_european_timezones">Heure Europe</string>
-    <string name="daylight_usa_timezones">Heure É.-U et Canada</string>
     <string name="timezone">Fuseau horaire</string>
-    <string name="dst_end_time">Heure de fin de l\'heure d\'été</string>
-    <string name="dst_start_time">Heure de début de l\'heure d\'été</string>
-    <string name="dst_end_date">Date de fin de l\'heure d\'été</string>
-    <string name="dst_start_date">Date de début de l\'heure d\'été</string>
-    <string name="use_daylight_saving_time">Utiliser l\'heure d\'été</string>
-    <string name="show_controller_time">Afficher l\'heure du contrôleur</string>
-    <string name="show_tablet_time">Afficher l\'heure de la tablette</string>
-    <string name="set_dst_dates_manually">Configurer manuellement les dates de l\'heure d\'été</string>
-    <string name="european_timezones_list_title">Fuseaux horaires européens pris en charge :</string>
-    <string-array name="array_european_timezones_description">
-        <item>Heure de Greenwich</item>
-        <item>Heure normale de l\'Europe centrale</item>
-        <item>Heure normale de l\'Europe de l\'Ouest</item>
-        <item>Heure normale de l\'Europe de l\'Est</item>
+    <string-array name="DAYOFWEEK">
+        <item>Lundi</item>
+        <item>Mardi</item>
+        <item>Mercredi</item>
+        <item>Jeudi</item>
+        <item>Vendredi</item>
+        <item>Samedi</item>
+        <item>Dimanche</item>
     </string-array>
-    <string name="us_timezones_list_title">Fuseaux horaires des É.-U et du Canada pris en charge :</string>
-    <string-array name="array_us_timezones">
-        <item>(UTC- 04:00)</item>
-        <item>(UTC-05:00)</item>
-        <item>(UTC-06:00)</item>
-        <item>(UTC-07:00)</item>
-        <item>(UTC-08:00)</item>
-        <item>(UTC-08:00)</item>
-    </string-array>
-    <string-array name="array_us_timezones_description">
-        <item>Heure de l\'Atlantique (Canada)</item>
-        <item>Heure de l\'Est (É.-U. et Canada)</item>
-        <item>Heure du Centre (É.-U et Canada)</item>
-        <item>Heure des Rocheuses (É.-U et Canada)</item>
-        <item>Heure du Pacifique (É.-U. et Canada)</item>
-        <item>Alaska</item>
-    </string-array>
-    <string name="DAYOFWEEK_MONDAY">Lundi</string>
-    <string name="DAYOFWEEK_TUESDAY">Mardi</string>
-    <string name="DAYOFWEEK_WEDNESDAY">Mercredi</string>
-    <string name="DAYOFWEEK_THURSDAY">Jeudi</string>
-    <string name="DAYOFWEEK_FRIDAY">Vendredi</string>
-    <string name="DAYOFWEEK_SATURDAY">Samedi</string>
-    <string name="DAYOFWEEK_SUNDAY">Dimanche</string>
     <string name="schedule">Programme</string>
     <string name="first_name">Prénom</string>
     <string name="middle_name">Second prénom</string>

@@ -1,6 +1,9 @@
 """
 This file provides configuration for 'translation_xml_to_c' script
 """
+# Execution flags whether to print for debug
+DEBUG_LOGGING = True
+OUTPUT_LOGGING = False
 
 # Encoding the data as UTF-8
 # NOTE: Other Encodings (e.g. for non-latin alphabet) are currently not supported

@@ -1,6 +1,8 @@
 <resources>
+    <string name="settings">Settings</string>
     <string name="low">Low</string>
     <string name="high">High</string>
+    <string name="version">Version</string>
     <string name="settings">Settings</string>
     <string name="cancel">CANCEL</string>
     <string name="ok">OK</string>
@@ -13,57 +15,18 @@
     <string name="refresh">Refresh</string>
     <string name="time">Time</string>
     <string name="clock_settings">Clock Settings</string>
-    <string name="daylight_timezones_message">DST is supported automatically by the Controller for standard</string>
-    <string name="daylight_european_timezones">European time</string>
-    <string name="daylight_usa_timezones">US and Canada time</string>
     <string name="zones">zones</string>
     <string name="date">Date</string>
     <string name="timezone">Timezone</string>
-    <string name="dst_end_time">DST End Time</string>
-    <string name="dst_start_time">DST Start Time</string>
-    <string name="dst_end_date">DST End Date</string>
-    <string name="dst_start_date">DST Start Date</string>
-    <string name="use_daylight_saving_time">Use Daylight Saving Time</string>
-    <string name="show_controller_time">Show Controller Time</string>
-    <string name="show_tablet_time">Show Tablet Time</string>
-    <string name="set_dst_dates_manually">Set DST Dates Manually</string>
-    <string name="european_timezones_list_title">Supported European Time Zones:</string>
-    <string-array name="array_european_timezones">
-        <item>(UTC+00:00)</item>
-        <item>(UTC+01:00)</item>
-        <item>(UTC+01:00)</item>
-        <item>(UTC+02:00)</item>
+    <string-array name="DAYOFWEEK">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
     </string-array>
-    <string-array name="array_european_timezones_description">
-        <item>Greenwich Mean Time</item>
-        <item>Central Europe Standard Time</item>
-        <item>Western Europe Standard Time</item>
-        <item>Eastern Europe Standard Time</item>
-    </string-array>
-    <string name="us_timezones_list_title">Supported US and Canada Time Zones:</string>
-    <string-array name="array_us_timezones">
-        <item>(UTC- 04:00)</item>
-        <item>(UTC-05:00)</item>
-        <item>(UTC-06:00)</item>
-        <item>(UTC-07:00)</item>
-        <item>(UTC-08:00)</item>
-        <item>(UTC-08:00)</item>
-    </string-array>
-    <string-array name="array_us_timezones_description">
-        <item>Atlantic Time (Canada)</item>
-        <item>Eastern Time (US and Canada)</item>
-        <item>Central Time (US and Canada)</item>
-        <item>Mountain Time (US and Canada)</item>
-        <item>Pacific Time (US and Canada)</item>
-        <item>Alaska</item>
-    </string-array>
-    <string name="DAYOFWEEK_MONDAY">Monday</string>
-    <string name="DAYOFWEEK_TUESDAY">Tuesday</string>
-    <string name="DAYOFWEEK_WEDNESDAY">Wednesday</string>
-    <string name="DAYOFWEEK_THURSDAY">Thursday</string>
-    <string name="DAYOFWEEK_FRIDAY">Friday</string>
-    <string name="DAYOFWEEK_SATURDAY">Saturday</string>
-    <string name="DAYOFWEEK_SUNDAY">Sunday</string>
     <string name="schedule">Schedule</string>
     <string name="first_name">First Name</string>
     <string name="middle_name">Middle Name</string>
@@ -73,17 +36,8 @@
     <string name="users">Users</string>
     <string name="user">User</string>   
     <string name="save">SAVE</string>
-    <string name="modify_password">Modify Password</string>
-    <string name="reset_password">Reset Password</string>
-    <string name="Password_modified_successfully">Password was modified successfully</string>
-    <string name="current_password">Current password</string>
-    <string name="new_password">New password</string>
-    <string name="change_password">Change password</string>
     <string name="timeout">Timeout</string>
     <string name="update">UPDATE</string>
-    <string name="file_cannot_be_empty">File cannot be empty</string>
-    <string name="file_is_invalid">File is invalid</string>
-    <string name="upload_fw_dialog_title_completed">Upload Firmware completed</string>
     <string name="uploading">Uploading</string>
     <string name="retry">Retry</string>
 </resources>

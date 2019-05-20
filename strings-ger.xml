@@ -1,5 +1,5 @@
 ﻿<resources>
-    <string name="action_settings">Einstellungen</string>
+    <string name="settings">Einstellungen</string>
     <string name="low">Niedrig</string>
     <string name="high">Hoch</string>
     <string name="version">Version</string>
@@ -14,61 +14,18 @@
     <string name="menu_paste">einfügen</string>
     <string name="menu_refresh">aktualisieren</string>
     <string name="time">Zeit</string>
-    <string name="clock_settings">Uhr-Einstellungen</string>
-    <string name="daylight_timezones_message">Sommerzeit wird standardmäßig vom Controller automatisch unterstützt</string>
-    <string name="daylight_european_timezones">Uhrzeit Europa</string>
-    <string name="daylight_usa_timezones">Uhrzeit USA und Kanada</string>
     <string name="zones">zonen</string>
     <string name="date">Datum</string>
     <string name="timezone">Zeitzone</string>
-    <string name="dst_end_time">Sommerzeit Endzeit</string>
-    <string name="dst_start_time">Sommerzeit Startzeit</string>
-    <string name="dst_end_date">Sommerzeit Enddatum</string>
-    <string name="dst_start_date">Sommerzeit Startdatum</string>
-    <string name="use_daylight_saving_time">Sommerzeit verwenden</string>
-    <string name="show_controller_time">Controller-Uhrzeit anzeigen</string>
-    <string name="show_tablet_time">Tablet-Uhrzeit anzeigen</string>
-    <string name="set_dst_dates_manually">Sommerzeit-Daten manuell einrichten</string>
-    <string name="european_timezones_list_title">Unterstützte europäische Zeitzonen:</string>
-    <string-array name="array_european_timezones">
-        <item>(UTC+00:00)</item>
-        <item>(UTC+01:00)</item>
-        <item>(UTC+01:00)</item>
-        <item>(UTC+02:00)</item>
+    <string-array name="DAYOFWEEK">
+        <item>Montag</item>
+        <item>Dienstag</item>
+        <item>Mittwoch</item>
+        <item>Donnerstag</item>
+        <item>Freitag</item>
+        <item>Samstag</item>
+        <item>Sonntag</item>
     </string-array>
-    <string-array name="array_european_timezones_description">
-        <item>Greenwich-Zeit</item>
-        <item>Mitteleuropäische Standardzeit</item>
-        <item>Westeuropäische Standardzeit</item>
-        <item>Osteuropäische Standardzeit</item>
-    </string-array>
-    <string name="us_timezones_list_title">Unterstütze Zeitzonen in den USA und Kanada:</string>
-    <string-array name="array_us_timezones">
-        <item>(UTC- 04:00)</item>
-        <item>(UTC-05:00)</item>
-        <item>(UTC-06:00)</item>
-        <item>(UTC-07:00)</item>
-        <item>(UTC-08:00)</item>
-        <item>(UTC-08:00)</item>
-    </string-array>
-    <string-array name="array_us_timezones_description">
-        <item>Atlantic Time (Kanada)</item>
-        <item>Eastern Time (USA und Kanada)</item>
-        <item>Central Time (USA und Kanada)</item>
-        <item>Mountain Time (USA und Kanada)</item>
-        <item>Pacific Time (USA und Kanada)</item>
-        <item>Alaska</item>
-    </string-array>
-    <string name="DAYMODESELECTION_INCLUDE_ALL_DAY">Tagmodus – Immer</string>
-    <string name="DAYMODESELECTION_EXCLUDE_ALL_DAY">Nachtmodus – Immer</string>
-    <string name="DAYMODESELECTION_CUSTOM_TIME_RANGE">Benutzerdefinierter Bereich</string>
-    <string name="DAYOFWEEK_MONDAY">Montag</string>
-    <string name="DAYOFWEEK_TUESDAY">Dienstag</string>
-    <string name="DAYOFWEEK_WEDNESDAY">Mittwoch</string>
-    <string name="DAYOFWEEK_THURSDAY">Donnerstag</string>
-    <string name="DAYOFWEEK_FRIDAY">Freitag</string>
-    <string name="DAYOFWEEK_SATURDAY">Samstag</string>
-    <string name="DAYOFWEEK_SUNDAY">Sonntag</string>
     <string name="schedule">Zeitplan</string>
     <string name="first_name">Vorname</string>
     <string name="middle_name">Zweiter Vorname</string>
